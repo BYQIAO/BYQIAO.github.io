@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+    
+    <head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
+    <meta name="description" content="Linux下搭建mqtt服务器，使用mosquitto" />
+    <meta name="hexo-theme-A4" content="v1.9.3" />
+    <link rel="alternate icon" type="image/webp" href="/img/mainForm.ico">
+    <title>Qiao</title>
+
+    
+        
+<link rel="stylesheet" href="/css/highlight/style1.css">
+
+        
+<link rel="stylesheet" href="/css/reset.css">
+
+        
+<link rel="stylesheet" href="/css/markdown.css">
+
+        
+<link rel="stylesheet" href="/css/fonts.css">
+ 
+         <!--注意：首页既不是post也不是page-->
+        
+        
+        
+<link rel="stylesheet" href="/css/ui.css">
+ 
+        
+<link rel="stylesheet" href="/css/style.css">
+
+
+        
+            <!--返回顶部css-->
+            
+<link rel="stylesheet" href="/css/returnToTop.css">
+
+            
+<link rel="stylesheet" href="/css/unicons.css">
+
+        
+        
+            <!--目录-->
+            
+<link rel="stylesheet" href="/css/toc.css">
+
+        
+    
+
+    
+        
+<link rel="stylesheet" href="/css/returnToLastPage.css">
+
+    
+    
+   
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+    
+    
+        <style>
+            .index-main{
+                max-width:  880px;
+            }
+        </style>
+
+    
+    
+
+
+
+    
+
+    
+    
+
+    
+    
+    
+    <body>
+        <script src="/js/darkmode-js.min.js"></script>
+        
+        <script>
+            const options = {
+                bottom: '40px', // default: '32px'
+                right: 'unset', // default: '32px'
+                left: '42px', // default: 'unset'
+                time: '0.3s', // default: '0.3s'
+                mixColor: '#fff', // default: '#fff'
+                backgroundColor: ' #e4e4e4 ',  // default: '#fff'
+                buttonColorDark: '#100f2c',  // default: '#100f2c'
+                buttonColorLight: '#fff', // default: '#fff'
+                saveInCookies: true, // default: true,
+                label: '🌓', // default: ''
+                autoMatchOsTheme: true // default: true
+            }
+            const darkmode = new Darkmode(options);
+            darkmode.showWidget();
+        </script>
+        
+        
+            <div class="left-toc-container">
+                <nav id="toc" class="bs-docs-sidebar"></nav>
+            </div>
+        
+        <div class="paper">
+            
+            
+            
+            
+                <div class="shadow-drop-2-bottom paper-main">
+                    
+
+
+<div class="header">
+    <div class="header-container">
+        <img style="
+        width: 56px;
+        height: auto;" alt="^-^" cache-control="max-age=86400" class="header-img" src="/img/mainForm.ico" width="10%"></img>
+        <div class="header-content">
+            <a class="logo" href="/">Qiao</a> 
+            <span class="description"></span> 
+        </div>
+        
+    </div>
+    
+   
+    <ul class="nav">
+        
+            
+                <li><a href="/">首页</a></li>
+            
+        
+            
+                <li><a href="/list/">文章</a></li>
+            
+        
+            
+                <li><a href="/categories/">分类</a></li>
+            
+        
+    </ul>
+</div> 
+        
+                    
+                    
+
+                    
+                    
+                    
+                    <!--说明是文章post页面-->
+                    
+                        <div class="post-main">
+
+    
+        
+            
+                <div class="post-main-title">
+                    Linux下搭建mqtt服务器，使用mosquitto
+                </div>
+            
+        
+      
+    
+
+    <div class="post-md">
+        
+            
+                <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Linux%E4%B8%8B%E6%90%AD%E5%BB%BAmqtt%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%8C%E4%BD%BF%E7%94%A8mosquitto"><span class="post-toc-text">Linux下搭建mqtt服务器，使用mosquitto</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E7%8E%AF%E5%A2%83"><span class="post-toc-text">环境</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#%E6%AD%A5%E9%AA%A4"><span class="post-toc-text">步骤</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%B7%BB%E5%8A%A0%E4%BB%93%E5%BA%93"><span class="post-toc-text">添加仓库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%AF%BC%E5%85%A5"><span class="post-toc-text">导入</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E6%B7%BB%E5%8A%A0%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="post-toc-text">添加配置文件</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E8%AE%BE%E7%BD%AEmosquitto%E6%9C%8D%E5%8A%A1"><span class="post-toc-text">设置mosquitto服务</span></a></li></ol></li></ol></li></ol>
+            
+        
+        <link rel="stylesheet" type="text/css" href="../../../css/lightgallery.min.css" /><div class=".article-gallery"><h1 id="Linux下搭建mqtt服务器，使用mosquitto"><a href="#Linux下搭建mqtt服务器，使用mosquitto" class="headerlink" title="Linux下搭建mqtt服务器，使用mosquitto"></a>Linux下搭建mqtt服务器，使用mosquitto</h1><h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><ul>
+<li>ubuntu</li>
+</ul>
+<h2 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h2><h3 id="添加仓库"><a href="#添加仓库" class="headerlink" title="添加仓库"></a>添加仓库</h3><p><code> sudo apt-add-repository ppa:mosquitto-dev/mosquitto-ppa</code> 现在好像不需要也行。</p>
+<h3 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h3><p><code>sudo apt update</code></p>
+<p><code>sudo apt install mosquitto</code></p>
+<p><code>sudo apt install mosquitto-dev</code></p>
+<h3 id="添加配置文件"><a href="#添加配置文件" class="headerlink" title="添加配置文件"></a>添加配置文件</h3><p>在<code>/etc/mosquitto/conf.d</code> 目录下创建<example>.conf 文件。</p>
+<p>在此文件内添加: </p>
+<ul>
+<li><p><code>listener 1883</code>  （监听1883端口）</p>
+</li>
+<li><p><code>allow_anonymous true</code> 允许匿名访问</p>
+</li>
+</ul>
+<h3 id="设置mosquitto服务"><a href="#设置mosquitto服务" class="headerlink" title="设置mosquitto服务"></a>设置mosquitto服务</h3><ul>
+<li><p><code>sudo service mosquitto restart</code> 重启下服务</p>
+</li>
+<li><p><code>sudo service mosquitto status</code> 查看服务是否启动</p>
+</li>
+<li><p><code>sudo systemctl enable mosquitto</code> 设置服务开机自启</p>
+</li>
+</ul>
+</div><script src="../../../js/lightgallery.min.js"></script><script>if("undefined"!=typeof lightGallery) {
+        var options1 = {
+            selector: '.gallery-item'
+        };
+        lightGallery(document.getElementsByClassName('.article-gallery')[0], options1);
+        }</script>
+    </div>
+
+    <div class="post-meta">
+        <i>
+        
+            <span>2024-09-12</span>
+            
+            
+             
+        
+        </i>
+    </div>
+    <br>
+    
+    
+        
+            
+    
+        
+            <div class="post-footer-pre-next">
+                
+                    <span>上一篇：<a href='/2024/09/12/SambaAccessProblem/'>samba共享文件夹无法访问</a></span>
+                
+
+                
+                    <span class="post-footer-pre-next-last-span-right">下一篇：<a href="/2024/09/11/testPost/">testPost</a>
+                    </span>
+                
+            </div>
+
+        
+    
+
+    
+        
+
+     
+</div>
+
+
+
+                                      
+                    
+                    
+                    <div class="footer">
+    
+        <span> 
+            © 1949-2024 China 
+
+            
+                
+
+            
+        </span>
+    
+</div>
+<!--这是指一条线往下的内容-->
+<div class="footer-last">
+    
+            <span>🌊只想让事情是它本来的样子🌊</span>
+            
+                <span class="footer-last-span-right"><i>本站由<a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/index.html">Hexo</a>驱动｜使用<a target="_blank" rel="noopener" href="https://github.com/HiNinoJay/hexo-theme-A4">Hexo-theme-A4</a>主题</i></span>
+            
+    
+</div>
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+
+    <!--目录-->
+    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" type="text/javascript" ></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tocify/1.9.0/javascripts/jquery.tocify.min.js" type="text/javascript" ></script>
+        
+<script src="/js/toc.js"></script>
+
+    
+
+    
+<script src="/js/randomHeaderContent.js"></script>
+
+    <!--回到顶部按钮-->
+    
+        
+<script src="/js/returnToTop.js"></script>
+
+    
+
+    
+        
+<script src="/js/returnToLastPage.js"></script>
+
+    
+
+
+
+
+
+<script src="/js/lightgallery.min.js"></script>
+
+
+
+                </div>
+            
+            
+                <!-- 回到顶部的按钮-->  
+                <div class="progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+            
+                <!-- 返回的按钮-->  
+                <div class="return-to-last-progress-wrap shadow-drop-2-bottom">
+                    <svg class="progress-circle svg-content" width="100%" height="100%" viewBox="-1 -1 102 102">
+                        <path d="M50,1 a49,49 0 0,1 0,98 a49,49 0 0,1 0,-98"/>
+                    </svg>
+                </div>
+            
+    </body>
+</html>
